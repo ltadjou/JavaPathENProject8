@@ -1,5 +1,6 @@
 package tourGuide;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +46,12 @@ public class TourGuideController {
     	VisitedLocation visitedLocation = tourGuideService.getUserLocation(getUser(userName));
     	return JsonStream.serialize(tourGuideService.getNearByAttractions(visitedLocation));
     }
+
+    @RequestMapping("/getNearbyAttractionsEdit")
+    public String getNearbyAttractionsEdit(@RequestParam String userName) {
+        VisitedLocation visitedLocation = tourGuideService.getUserLocation(getUser(userName));
+        return JsonStream.serialize(tourGuideService.getNearByAttractions(visitedLocation));
+    }
     
     @RequestMapping("/getRewards") 
     public String getRewards(@RequestParam String userName) {
@@ -62,6 +69,10 @@ public class TourGuideController {
     	//        "019b04a9-067a-4c76-8817-ee75088c3822": {"longitude":-48.188821,"latitude":74.84371} 
     	//        ...
     	//     }
+
+        /* Liste des users */
+        List<User> usersList = new ArrayList<>();
+
     	
     	return JsonStream.serialize("");
     }

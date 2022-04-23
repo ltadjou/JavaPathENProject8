@@ -97,7 +97,26 @@ public class TourGuideService {
 				nearbyAttractions.add(attraction);
 			}
 		}
-		
+		return nearbyAttractions;
+	}
+
+	public List<Attraction> getFiveClosestAttractions(VisitedLocation visitedLocation) {
+		List<Attraction> fiveClosestAttractions = new ArrayList<>();
+		List<Attraction> attractionsList = new ArrayList<>();
+		//User user = LoginUtils.getLoggedUser;
+		int maxClosestAttraction = 5;
+		int i;
+		for(Attraction attraction : gpsUtil.getAttractions()) {
+			attractionsList.add(attraction);
+		}
+		for(Attraction attraction : attractionsList) {
+			Attraction closestAttraction = attraction;
+			if (rewardsService.getDistance(gpsUtil.getUserLocation(user), attraction))
+		}
+			if(rewardsService.isWithinAttractionProximity(attraction, visitedLocation.location)) {
+				nearbyAttractions.add(attraction);
+			}
+		}
 		return nearbyAttractions;
 	}
 	
