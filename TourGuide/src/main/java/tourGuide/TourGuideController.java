@@ -71,7 +71,16 @@ public class TourGuideController {
     	//     }
 
         /* Liste des users */
-        List<User> usersList = new ArrayList<>();
+        List<User> usersList = tourGuideService.getAllUsers();
+
+        /* Liste des users ID */
+//        List<UUID> idList = new ArrayList<>();
+//        for (User user : usersList){
+//            idList.add(user.getUserId());
+//        }
+
+        /* User's Location History */
+//        tourGuideService.generateUserLocationHistory(user);
 
     	
     	return JsonStream.serialize("");
