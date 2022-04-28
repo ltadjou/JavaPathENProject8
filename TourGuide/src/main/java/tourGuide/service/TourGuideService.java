@@ -20,6 +20,7 @@ import gpsUtil.GpsUtil;
 import gpsUtil.location.Attraction;
 import gpsUtil.location.Location;
 import gpsUtil.location.VisitedLocation;
+import tourGuide.attraction.Proximate;
 import tourGuide.helper.InternalTestHelper;
 import tourGuide.tracker.Tracker;
 import tourGuide.user.User;
@@ -35,7 +36,7 @@ public class TourGuideService {
 	private final TripPricer tripPricer = new TripPricer();
 	public final Tracker tracker;
 	boolean testMode = true;
-	
+
 	public TourGuideService(GpsUtil gpsUtil, RewardsService rewardsService) {
 		this.gpsUtil = gpsUtil;
 		this.rewardsService = rewardsService;
@@ -105,19 +106,25 @@ public class TourGuideService {
 		List<Attraction> attractionsList = new ArrayList<>();
 		//User user = LoginUtils.getLoggedUser;
 		int maxClosestAttraction = 5;
-		int i;
-		for(Attraction attraction : gpsUtil.getAttractions()) {
-			attractionsList.add(attraction);
+
+		List<Proximate> tmp = new ArrayList<>();
+
+//		toutes tes attractions et tu calcules l'objet proximyty correspondant:
+
+		Proximate proximate = new Proximate();
+		proximate.setAttraction(Attraction);
+		proximate.setDistance(...);
+		tmp.add(proximate);
+
+		Collections.sort(tmp);
+
+		List<Attraction> result = new Arraylist<>();
+
+
+		for (int i=0; i<5;i++) {
+			result.add(tmp.get(i).getAttraction();
 		}
-		for(Attraction attraction : attractionsList) {
-			Attraction closestAttraction = attraction;
-			if (rewardsService.getDistance(gpsUtil.getUserLocation(user), attraction))
-		}
-			if(rewardsService.isWithinAttractionProximity(attraction, visitedLocation.location)) {
-				nearbyAttractions.add(attraction);
-			}
-		}
-		return nearbyAttractions;
+
 	}
 	
 	private void addShutDownHook() {
