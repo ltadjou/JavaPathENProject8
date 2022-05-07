@@ -83,15 +83,17 @@ public class TourGuideController {
         /* User's Location History */
 //        tourGuideService.generateUserLocationHistory(user);
 
+        VisitedLocation lastVisitedLocation = null;
         StringBuilder result = new StringBuilder();
         for (User user : usersList){
             result.append(user.getUserId());
             result.append(" : { ");
-            result.append(user.getVisitedLocations());
+            for (VisitedLocation visitedLocation : user.getVisitedLocations()){
+                lastVisitedLocation = visitedLocation;
+            }
+            result.append(lastVisitedLocation); // Dernier élément d'une liste : list.size()-1
             result.append(" }");
         }
-
-
     	
 //    	return JsonStream.serialize("");
         return JsonStream.serialize(result);
