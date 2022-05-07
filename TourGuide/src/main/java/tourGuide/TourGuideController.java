@@ -83,10 +83,18 @@ public class TourGuideController {
         /* User's Location History */
 //        tourGuideService.generateUserLocationHistory(user);
 
-        
+        StringBuilder result = new StringBuilder();
+        for (User user : usersList){
+            result.append(user.getUserId());
+            result.append(" : { ");
+            result.append(user.getVisitedLocations());
+            result.append(" }");
+        }
+
 
     	
-    	return JsonStream.serialize("");
+//    	return JsonStream.serialize("");
+        return JsonStream.serialize(result);
     }
     
     @RequestMapping("/getTripDeals")
