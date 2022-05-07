@@ -2,13 +2,7 @@ package tourGuide.service;
 
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -101,30 +95,26 @@ public class TourGuideService {
 		return nearbyAttractions;
 	}
 
+	/*New Method*/
 	public List<Attraction> getFiveClosestAttractions(VisitedLocation visitedLocation) {
 		List<Attraction> fiveClosestAttractions = new ArrayList<>();
-		List<Attraction> attractionsList = new ArrayList<>();
-		//User user = LoginUtils.getLoggedUser;
+		List<Proximate> attractionsList = new ArrayList<>();
 		int maxClosestAttraction = 5;
+		Proximate proximateAttraction = new Proximate();
 
-		List<Proximate> tmp = new ArrayList<>();
-
-//		toutes tes attractions et tu calcules l'objet proximyty correspondant:
-
-		Proximate proximate = new Proximate();
-		proximate.setAttraction(Attraction);
-		proximate.setDistance(...);
-		tmp.add(proximate);
-
-		Collections.sort(tmp);
-
-		List<Attraction> result = new Arraylist<>();
-
-
-		for (int i=0; i<5;i++) {
-			result.add(tmp.get(i).getAttraction();
+		for (Attraction attraction : gpsUtil.getAttractions()){
+			proximateAttraction.setAttraction(attraction);
+			proximateAttraction.setDistance(rewardsService.getDistance(attraction, visitedLocation.location));
+			attractionsList.add(proximateAttraction);
 		}
 
+		Collections.sort(attractionsList);
+
+		for (int i=0; i<maxClosestAttraction;i++) {
+			fiveClosestAttractions.add(attractionsList.get(i).getAttraction());
+		}
+
+		return fiveClosestAttractions;
 	}
 	
 	private void addShutDownHook() {

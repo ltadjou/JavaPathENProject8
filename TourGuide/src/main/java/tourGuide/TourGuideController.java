@@ -2,6 +2,7 @@ package tourGuide;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -74,13 +75,15 @@ public class TourGuideController {
         List<User> usersList = tourGuideService.getAllUsers();
 
         /* Liste des users ID */
-//        List<UUID> idList = new ArrayList<>();
-//        for (User user : usersList){
-//            idList.add(user.getUserId());
-//        }
+        List<UUID> idList = new ArrayList<>();
+        for (User user : usersList){
+            idList.add(user.getUserId());
+        }
 
         /* User's Location History */
 //        tourGuideService.generateUserLocationHistory(user);
+
+        
 
     	
     	return JsonStream.serialize("");

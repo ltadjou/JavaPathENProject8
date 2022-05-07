@@ -4,7 +4,7 @@ import gpsUtil.location.Attraction;
 
 public class Proximate implements Comparable<Proximate> {
         Attraction attraction;
-        Float distance;
+        Double distance;
 
     @Override
     public int compareTo(Proximate o) {
@@ -21,11 +21,11 @@ public class Proximate implements Comparable<Proximate> {
         this.attraction = attraction;
     }
 
-    public Float getDistance() {
+    public Double getDistance() {
         return distance;
     }
 
-    public void setDistance(Float distance) {
+    public void setDistance(Double distance) {
         this.distance = distance;
     }
 }
