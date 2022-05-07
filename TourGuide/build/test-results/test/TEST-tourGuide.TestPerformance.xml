@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="tourGuide.TestPerformance" tests="1" skipped="1" failures="0" errors="0" timestamp="2022-05-07T08:02:07" hostname="ALIENWARE-M15R4" time="0.0">
+<testsuite name="tourGuide.TestPerformance" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-05-07T10:33:40" hostname="ALIENWARE-M15R4" time="21.023">
   <properties/>
-  <testcase name="highVolumeTrackLocation" classname="tourGuide.TestPerformance" time="0.0">
-    <skipped/>
-  </testcase>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
+  <testcase name="highVolumeTrackLocation" classname="tourGuide.TestPerformance" time="21.023"/>
+  <system-out><![CDATA[Cores : 16
+12:33:40.827 [Test worker] INFO tourGuide.service.TourGuideService - TestMode enabled
+12:33:40.831 [Test worker] DEBUG tourGuide.service.TourGuideService - Initializing users
+12:33:40.948 [Test worker] DEBUG tourGuide.service.TourGuideService - Created 200 internal test users.
+12:33:40.948 [Test worker] DEBUG tourGuide.service.TourGuideService - Finished initializing users
+12:33:40.954 [pool-1-thread-1] DEBUG tourGuide.tracker.Tracker - Begin Tracker. Tracking 200 users.
+12:33:54.292 [pool-1-thread-1] DEBUG tourGuide.tracker.Tracker - Tracker Time Elapsed: 13 seconds.
+12:33:54.292 [pool-1-thread-1] DEBUG tourGuide.tracker.Tracker - Tracker sleeping
+highVolumeTrackLocation: Time Elapsed: 20 seconds.
+]]></system-out>
+  <system-err><![CDATA[mai 07, 2022 12:33:40 PM org.javamoney.moneta.DefaultMonetaryContextFactory createMonetaryContextNonNullConfig
+INFOS: Using custom MathContext: precision=256, roundingMode=HALF_EVEN
+]]></system-err>
 </testsuite>

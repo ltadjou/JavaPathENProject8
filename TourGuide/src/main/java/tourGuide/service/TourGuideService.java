@@ -81,8 +81,39 @@ public class TourGuideService {
 	public VisitedLocation trackUserLocation(User user) {
 		VisitedLocation visitedLocation = gpsUtil.getUserLocation(user.getUserId());
 		user.addToVisitedLocations(visitedLocation);
-		rewardsService.calculateRewards(user);
+//		rewardsService.calculateRewards(user);
 		return visitedLocation;
+	}
+
+	public void trackUserLocations(List<User> users, int threadNumber){
+		List<Thread> threads = new ArrayList<>();
+		for (int i=0; i<threadNumber; i++){
+			int subListSize = users.size()/threadNumber;
+			List<User> tmp = new ArrayList<>();
+			tmp.addAll(users.subList(i*subListSize, (i+1)*subListSize));
+			Thread myThread = new Thread() {
+				List<User> users;
+				@Override
+				public void run() {
+					for (User user: users) {
+//						trackUserLocation(user);
+						try {
+							Thread.sleep(100);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+					}
+				}
+				public Thread init(List<User> users){
+					this.users = users;
+					return this;
+				}
+			}.init(tmp);
+			threads.add(myThread);
+		}
+		for (Thread thread : threads) {
+			thread.run();
+		}
 	}
 
 	public List<Attraction> getNearByAttractions(VisitedLocation visitedLocation) {

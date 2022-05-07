@@ -13,15 +13,15 @@ public class Application {
         MultiThreading multiThreading = new MultiThreading();
         multiThreading.start();
 
-//        MultiThreading multiThreading2 = new MultiThreading();
-//        multiThreading2.start();
+        MultiThreading multiThreading2 = new MultiThreading();
+        multiThreading2.start();
 
         /* On peut également faire une boucle */
 //        for (int i=0; i<5; i++){
 //            MultiThreading multiThreading = new MultiThreading();
 //            multiThreading.start();
 //        }
-        
+
     }
 
 }
