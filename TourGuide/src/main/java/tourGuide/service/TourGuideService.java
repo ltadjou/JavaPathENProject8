@@ -81,10 +81,11 @@ public class TourGuideService {
 	public VisitedLocation trackUserLocation(User user) {
 		VisitedLocation visitedLocation = gpsUtil.getUserLocation(user.getUserId());
 		user.addToVisitedLocations(visitedLocation);
-//		rewardsService.calculateRewards(user);
+		rewardsService.calculateRewards(user);
 		return visitedLocation;
 	}
 
+	// New method using MultiThreading
 	public void trackUserLocations(List<User> users, int threadNumber){
 		List<Thread> threads = new ArrayList<>();
 		for (int i=0; i<threadNumber; i++){
@@ -112,7 +113,8 @@ public class TourGuideService {
 			threads.add(myThread);
 		}
 		for (Thread thread : threads) {
-			thread.run();
+//			thread.run();
+			thread.start();
 		}
 	}
 

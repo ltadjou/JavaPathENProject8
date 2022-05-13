@@ -60,15 +60,15 @@ public class TestPerformance {
 		
 	    StopWatch stopWatch = new StopWatch();
 		stopWatch.start();
-//		for(User user : allUsers) {
-//			tourGuideService.trackUserLocation(user);
-//		try {
-//			Thread.sleep(100);
-//		} catch (InterruptedException e) {
-//			e.printStackTrace();
-//		}
-//		}
-		tourGuideService.trackUserLocations(allUsers, 10);
+		for(User user : allUsers) {
+			tourGuideService.trackUserLocation(user);
+		try {
+			Thread.sleep(100);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		}
+//		tourGuideService.trackUserLocations(allUsers, 10);
 		stopWatch.stop();
 		tourGuideService.tracker.stopTracking();
 
