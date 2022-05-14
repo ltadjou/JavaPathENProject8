@@ -82,11 +82,12 @@ public class TourGuideService {
 		VisitedLocation visitedLocation = gpsUtil.getUserLocation(user.getUserId());
 		user.addToVisitedLocations(visitedLocation);
 		rewardsService.calculateRewards(user);
+		System.out.println(user.getUserName());
 		return visitedLocation;
 	}
 
 	// New method using MultiThreading
-	public void trackUserLocations(List<User> users, int threadNumber){
+	public void trackUserLocations(List<User> users, int threadNumber) throws InterruptedException {
 		List<Thread> threads = new ArrayList<>();
 		for (int i=0; i<threadNumber; i++){
 			int subListSize = users.size()/threadNumber;
@@ -97,10 +98,10 @@ public class TourGuideService {
 				@Override
 				public void run() {
 					for (User user: users) {
-//						trackUserLocation(user);
+						trackUserLocation(user);
 						try {
-							Thread.sleep(100);
-						} catch (InterruptedException e) {
+							Thread.sleep(1000);
+						} catch (Exception e) {
 							e.printStackTrace();
 						}
 					}
@@ -115,6 +116,10 @@ public class TourGuideService {
 		for (Thread thread : threads) {
 //			thread.run();
 			thread.start();
+		}
+		for (Thread thread : threads) {
+//			thread.run();
+			thread.join();
 		}
 	}
 

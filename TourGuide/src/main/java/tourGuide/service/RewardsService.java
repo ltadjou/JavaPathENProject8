@@ -1,5 +1,6 @@
 package tourGuide.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -50,6 +51,39 @@ public class RewardsService {
 			}
 		}
 	}
+
+	// New method using MultiThreading
+	public void calculateRewards2(List<User> users, int threadNumber) {
+		List<Thread> threads = new ArrayList<>();
+		for (int i=0; i<threadNumber; i++){
+			int subListSize = users.size()/threadNumber;
+			List<User> tmp = new ArrayList<>();
+			tmp.addAll(users.subList(i*subListSize, (i+1)*subListSize));
+			Thread myThread = new Thread() {
+				List<User> users;
+				@Override
+				public void run() {
+					for (User user: users) {
+						calculateRewards(user);
+						try {
+							Thread.sleep(100);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+					}
+				}
+				public Thread init(List<User> users){
+					this.users = users;
+					return this;
+				}
+			}.init(tmp);
+			threads.add(myThread);
+		}
+		for (Thread thread : threads) {
+			thread.start();
+		}
+	}
+
 	
 	public boolean isWithinAttractionProximity(Attraction attraction, Location location) {
 		return getDistance(attraction, location) > attractionProximityRange ? false : true;
