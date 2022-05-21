@@ -23,10 +23,12 @@ public class RewardsService {
 	private int attractionProximityRange = 200;
 	private final GpsUtil gpsUtil;
 	private final RewardCentral rewardsCentral;
+	private List<Attraction> attractions;
 	
 	public RewardsService(GpsUtil gpsUtil, RewardCentral rewardCentral) {
 		this.gpsUtil = gpsUtil;
 		this.rewardsCentral = rewardCentral;
+		this.attractions = gpsUtil.getAttractions();
 	}
 	
 	public void setProximityBuffer(int proximityBuffer) {
@@ -39,7 +41,7 @@ public class RewardsService {
 	
 	public void calculateRewards(User user) {
 		List<VisitedLocation> userLocations = user.getVisitedLocations();
-		List<Attraction> attractions = gpsUtil.getAttractions();
+
 		
 		for(VisitedLocation visitedLocation : userLocations) {
 			for(Attraction attraction : attractions) {
@@ -65,11 +67,6 @@ public class RewardsService {
 				public void run() {
 					for (User user: users) {
 						calculateRewards(user);
-						try {
-							Thread.sleep(100);
-						} catch (InterruptedException e) {
-							e.printStackTrace();
-						}
 					}
 				}
 				public Thread init(List<User> users){
@@ -78,6 +75,9 @@ public class RewardsService {
 				}
 			}.init(tmp);
 			threads.add(myThread);
+		}
+		for (Thread thread : threads) {
+			thread.start();
 		}
 		for (Thread thread : threads) {
 			thread.join();

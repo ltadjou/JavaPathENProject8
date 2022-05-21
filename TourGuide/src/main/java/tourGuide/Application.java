@@ -8,14 +8,14 @@ public class Application {
 
     public static void main(String[] args) {
 
-//        SpringApplication.run(Application.class, args);
+        SpringApplication.run(Application.class, args);
 
-        MultiThreading multiThreading = new MultiThreading();
-        multiThreading.start();
+//        MultiThreading multiThreading = new MultiThreading();
+//        multiThreading.start();
 //        multiThreading.run();
 
-        MultiThreading multiThreading2 = new MultiThreading();
-        multiThreading2.start();
+//        MultiThreading multiThreading2 = new MultiThreading();
+//        multiThreading2.start();
 //        multiThreading2.run();
 
         /* On peut également faire une boucle */

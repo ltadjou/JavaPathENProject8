@@ -99,11 +99,6 @@ public class TourGuideService {
 				public void run() {
 					for (User user: users) {
 						trackUserLocation(user);
-						try {
-							Thread.sleep(1000);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
 					}
 				}
 				public Thread init(List<User> users){
@@ -114,11 +109,9 @@ public class TourGuideService {
 			threads.add(myThread);
 		}
 		for (Thread thread : threads) {
-//			thread.run();
 			thread.start();
 		}
 		for (Thread thread : threads) {
-//			thread.run();
 			thread.join();
 		}
 	}
