@@ -82,7 +82,7 @@ public class TourGuideService {
 		VisitedLocation visitedLocation = gpsUtil.getUserLocation(user.getUserId());
 		user.addToVisitedLocations(visitedLocation);
 		rewardsService.calculateRewards(user);
-		System.out.println(user.getUserName());
+//		System.out.println(user.getUserName());
 		return visitedLocation;
 	}
 

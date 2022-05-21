@@ -53,7 +53,7 @@ public class RewardsService {
 	}
 
 	// New method using MultiThreading
-	public void calculateRewards2(List<User> users, int threadNumber) {
+	public void calculateRewards2(List<User> users, int threadNumber) throws InterruptedException {
 		List<Thread> threads = new ArrayList<>();
 		for (int i=0; i<threadNumber; i++){
 			int subListSize = users.size()/threadNumber;
@@ -80,7 +80,7 @@ public class RewardsService {
 			threads.add(myThread);
 		}
 		for (Thread thread : threads) {
-			thread.start();
+			thread.join();
 		}
 	}
 

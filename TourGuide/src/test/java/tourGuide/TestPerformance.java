@@ -75,7 +75,7 @@ public class TestPerformance {
 	
 //	@Ignore
 	@Test
-	public void highVolumeGetRewards() {
+	public void highVolumeGetRewards() throws InterruptedException {
 		GpsUtil gpsUtil = new GpsUtil();
 		RewardsService rewardsService = new RewardsService(gpsUtil, new RewardCentral());
 
@@ -91,6 +91,8 @@ public class TestPerformance {
 		allUsers.forEach(u -> u.addToVisitedLocations(new VisitedLocation(u.getUserId(), attraction, new Date())));
 	     
 	    allUsers.forEach(u -> rewardsService.calculateRewards(u));
+
+//	    rewardsService.calculateRewards2(allUsers, 5);
 	    
 		for(User user : allUsers) {
 			assertTrue(user.getUserRewards().size() > 0);
