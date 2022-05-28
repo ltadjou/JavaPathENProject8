@@ -53,7 +53,7 @@ public class TourGuideController {
 
     @RequestMapping("/getNearbyAttractionsEdit")
     public String getNearbyAttractionsEdit(@RequestParam String userName) {
-        String result = "";
+        NearbyAttractionResult result = new NearbyAttractionResult();
 
         /* User's Location */
         VisitedLocation visitedLocation = tourGuideService.getUserLocation(getUser(userName));
@@ -62,16 +62,15 @@ public class TourGuideController {
         List<Attraction> fiveClosestAttractions = tourGuideService.getFiveClosestAttractions(visitedLocation);
 
         /* Distance in miles between the user's location and each of the attractions. */
-        List<Double> distancesUserAttractions = new ArrayList<>();
-        for (Attraction attraction : fiveClosestAttractions) {
-            distancesUserAttractions.add(rewardsService.getDistance(visitedLocation, /*attraction localisation*/ ));
-        }
+        List<Double> distances = tourGuideService.getDistancesUserAttractions(fiveClosestAttractions, getUser(userName));
 
         /* Reward points for visiting each Attraction. */
-        List<Integer> rewardPointsList = new ArrayList<>();
-        for (Attraction attraction ; fiveClosestAttractions){
-            rewardPointsList.add(rewardCentral.getAttractionRewardPoints(UUID attractionId, UUID userId));
-        }
+        List<Integer> rewards = tourGuideService.getRewardPointsList(fiveClosestAttractions, getUser(userName));
+
+        result.visitedLocation = visitedLocation;
+        result.attractionList = fiveClosestAttractions;
+        result.distances = distances;
+        result.rewards = rewards;
 
         return JsonStream.serialize(result);
     }
@@ -81,7 +80,7 @@ public class TourGuideController {
     	return JsonStream.serialize(tourGuideService.getUserRewards(getUser(userName)));
     }
     
-    @RequestMapping("/getAllCurrentLocations")
+    @RequestMapping(value = "/getAllCurrentLocations", produces = { "application/json" })
     public String getAllCurrentLocations() {
     	// TODO: Get a list of every user's most recent location as JSON
     	//- Note: does not use gpsUtil to query for their current location, 
@@ -98,25 +97,25 @@ public class TourGuideController {
 
         /* User's Location History */
         StringBuilder result = new StringBuilder();
-        String newLine = System.getProperty("line.separator");
-
+        result.append(" { ");
         for (User user : usersList){
 
             result.append(user.getUserId());
             result.append(" : ");
-            result.append(" \r\n ");
+
 
             int sizeOfVisitedLocationsList = user.getVisitedLocations().size()-1; /* Dernier élément d'une liste : list.size()-1 */
             List<VisitedLocation> visitedLocationsList = user.getVisitedLocations();
             VisitedLocation lastVisitedLocation = visitedLocationsList.get(sizeOfVisitedLocationsList);
-            result.append(lastVisitedLocation);
-            result.append(" TOTO ");
+            result.append(JsonStream.serialize(lastVisitedLocation.location));
+            result.append(", \n ");
+//            result.append("
 
         }
-    	
+        result.append(" } ");
 //    	return JsonStream.serialize("");
-        return JsonStream.serialize(result);
-//        return result;
+//        return JsonStream.serialize(result);
+        return result.toString();
 
 //        JsonObject jsonObject = new JsonObject(result.toString());
     }

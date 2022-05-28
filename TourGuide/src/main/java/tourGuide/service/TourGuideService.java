@@ -14,6 +14,7 @@ import gpsUtil.GpsUtil;
 import gpsUtil.location.Attraction;
 import gpsUtil.location.Location;
 import gpsUtil.location.VisitedLocation;
+import rewardCentral.RewardCentral;
 import tourGuide.attraction.Proximate;
 import tourGuide.helper.InternalTestHelper;
 import tourGuide.tracker.Tracker;
@@ -30,6 +31,7 @@ public class TourGuideService {
 	private final TripPricer tripPricer = new TripPricer();
 	public final Tracker tracker;
 	boolean testMode = true;
+
 
 	public TourGuideService(GpsUtil gpsUtil, RewardsService rewardsService) {
 		this.gpsUtil = gpsUtil;
@@ -90,6 +92,12 @@ public class TourGuideService {
 	public void trackUserLocations(List<User> users, int threadNumber) throws InterruptedException {
 		List<Thread> threads = new ArrayList<>();
 		for (int i=0; i<threadNumber; i++){
+//			if (users.size()%2 == 0){
+//				int subListSize = users.size()/threadNumber;
+//			}
+//			else {
+//				int subListSize =
+//			}
 			int subListSize = users.size()/threadNumber;
 			List<User> tmp = new ArrayList<>();
 			tmp.addAll(users.subList(i*subListSize, (i+1)*subListSize));
@@ -146,6 +154,25 @@ public class TourGuideService {
 		}
 
 		return fiveClosestAttractions;
+	}
+	/* Distance in miles between the user's location and each of the attractions. */
+	public List<Double> getDistancesUserAttractions (List<Attraction> attractions, User user) {
+		List<Double> distancesUserAttractions = new ArrayList<>();
+		for (Attraction attraction : attractions) {
+			Location location = new Location(attraction.latitude, attraction.longitude);
+			distancesUserAttractions.add(rewardsService.getDistance(getUserLocation(user).location, location));
+		}
+		return distancesUserAttractions;
+	}
+
+	/* Reward points for visiting each Attraction. */
+	public final RewardCentral rewardCentral = new RewardCentral();
+	public List<Integer> getRewardPointsList (List<Attraction> attractions, User user) {
+		List<Integer> rewardPointsList = new ArrayList<>();
+		for (Attraction attraction : attractions) {
+			rewardPointsList.add(rewardCentral.getAttractionRewardPoints(attraction.attractionId, user.getUserId()));
+		}
+		return rewardPointsList;
 	}
 	
 	private void addShutDownHook() {
