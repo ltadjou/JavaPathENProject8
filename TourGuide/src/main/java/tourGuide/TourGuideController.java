@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import com.jsoniter.annotation.JsonObject;
+import jdk.nashorn.api.scripting.JSObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -74,29 +76,29 @@ public class TourGuideController {
         /* Liste des users */
         List<User> usersList = tourGuideService.getAllUsers();
 
-        /* Liste des users ID */
-        List<UUID> idList = new ArrayList<>();
-        for (User user : usersList){
-            idList.add(user.getUserId());
-        }
-
         /* User's Location History */
-//        tourGuideService.generateUserLocationHistory(user);
-
-        VisitedLocation lastVisitedLocation = null;
         StringBuilder result = new StringBuilder();
+        String newLine = System.getProperty("line.separator");
+
         for (User user : usersList){
+
             result.append(user.getUserId());
-            result.append(" : { ");
-            for (VisitedLocation visitedLocation : user.getVisitedLocations()){
-                lastVisitedLocation = visitedLocation;
-            }
-            result.append(lastVisitedLocation); // Dernier élément d'une liste : list.size()-1
-            result.append(" }");
+            result.append(" : ");
+            result.append(" \r\n ");
+
+            int sizeOfVisitedLocationsList = user.getVisitedLocations().size()-1; /* Dernier élément d'une liste : list.size()-1 */
+            List<VisitedLocation> visitedLocationsList = user.getVisitedLocations();
+            VisitedLocation lastVisitedLocation = visitedLocationsList.get(sizeOfVisitedLocationsList);
+            result.append(lastVisitedLocation);
+            result.append(" TOTO ");
+
         }
     	
 //    	return JsonStream.serialize("");
         return JsonStream.serialize(result);
+//        return result;
+
+//        JsonObject jsonObject = new JsonObject(result.toString());
     }
     
     @RequestMapping("/getTripDeals")
