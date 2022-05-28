@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.UUID;
 
 import com.jsoniter.annotation.JsonObject;
+import gpsUtil.location.Attraction;
 import jdk.nashorn.api.scripting.JSObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -52,8 +53,14 @@ public class TourGuideController {
 
     @RequestMapping("/getNearbyAttractionsEdit")
     public String getNearbyAttractionsEdit(@RequestParam String userName) {
+        String result = "";
         VisitedLocation visitedLocation = tourGuideService.getUserLocation(getUser(userName));
-        return JsonStream.serialize(tourGuideService.getNearByAttractions(visitedLocation));
+        List<Attraction> fiveClosestAttractions = tourGuideService.getFiveClosestAttractions(visitedLocation);
+        List<Double> distancesUserAttraction = new ArrayList<>();
+        for (Attraction attraction : fiveClosestAttractions) {
+            distancesUserAttraction.add(rewardsService.getDistance(visitedLocation, ));
+        }
+        return JsonStream.serialize(result);
     }
     
     @RequestMapping("/getRewards") 
