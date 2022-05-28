@@ -54,12 +54,25 @@ public class TourGuideController {
     @RequestMapping("/getNearbyAttractionsEdit")
     public String getNearbyAttractionsEdit(@RequestParam String userName) {
         String result = "";
+
+        /* User's Location */
         VisitedLocation visitedLocation = tourGuideService.getUserLocation(getUser(userName));
+
+        /* Five Closest Attraction */
         List<Attraction> fiveClosestAttractions = tourGuideService.getFiveClosestAttractions(visitedLocation);
-        List<Double> distancesUserAttraction = new ArrayList<>();
+
+        /* Distance in miles between the user's location and each of the attractions. */
+        List<Double> distancesUserAttractions = new ArrayList<>();
         for (Attraction attraction : fiveClosestAttractions) {
-            distancesUserAttraction.add(rewardsService.getDistance(visitedLocation, ));
+            distancesUserAttractions.add(rewardsService.getDistance(visitedLocation, /*attraction localisation*/ ));
         }
+
+        /* Reward points for visiting each Attraction. */
+        List<Integer> rewardPointsList = new ArrayList<>();
+        for (Attraction attraction ; fiveClosestAttractions){
+            rewardPointsList.add(rewardCentral.getAttractionRewardPoints(UUID attractionId, UUID userId));
+        }
+
         return JsonStream.serialize(result);
     }
     
