@@ -97,27 +97,21 @@ public class TourGuideController {
 
         /* User's Location History */
         StringBuilder result = new StringBuilder();
-        result.append(" { ");
+        result.append(" {\n");
+        result.append(" ");
         for (User user : usersList){
 
             result.append(user.getUserId());
             result.append(" : ");
-
 
             int sizeOfVisitedLocationsList = user.getVisitedLocations().size()-1; /* Dernier élément d'une liste : list.size()-1 */
             List<VisitedLocation> visitedLocationsList = user.getVisitedLocations();
             VisitedLocation lastVisitedLocation = visitedLocationsList.get(sizeOfVisitedLocationsList);
             result.append(JsonStream.serialize(lastVisitedLocation.location));
             result.append(", \n ");
-//            result.append("
-
         }
-        result.append(" } ");
-//    	return JsonStream.serialize("");
-//        return JsonStream.serialize(result);
+        result.append("}");
         return result.toString();
-
-//        JsonObject jsonObject = new JsonObject(result.toString());
     }
     
     @RequestMapping("/getTripDeals")

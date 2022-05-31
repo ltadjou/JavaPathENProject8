@@ -141,6 +141,7 @@ public class TourGuideService {
 		int maxClosestAttraction = 5;
 		Proximate proximateAttraction = new Proximate();
 
+
 		for (Attraction attraction : gpsUtil.getAttractions()){
 			proximateAttraction.setAttraction(attraction);
 			proximateAttraction.setDistance(rewardsService.getDistance(attraction, visitedLocation.location));
