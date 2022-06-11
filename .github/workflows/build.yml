@@ -28,4 +28,4 @@ jobs:
         with:
           arguments: build
       - name: Build the Docker image
-        run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+        run: docker build . --file Dockerfile --tag henoss/tourguide:$(date +%s)
