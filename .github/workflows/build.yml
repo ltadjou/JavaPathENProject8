@@ -1,4 +1,5 @@
-name: hello-world
+name: Build_global
+
 on:
   push:
     branches:
