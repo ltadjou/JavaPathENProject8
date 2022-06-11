@@ -92,12 +92,6 @@ public class TourGuideService {
 	public void trackUserLocations(List<User> users, int threadNumber) throws InterruptedException {
 		List<Thread> threads = new ArrayList<>();
 		for (int i=0; i<threadNumber; i++){
-//			if (users.size()%2 == 0){
-//				int subListSize = users.size()/threadNumber;
-//			}
-//			else {
-//				int subListSize =
-//			}
 			int subListSize = users.size()/threadNumber;
 			List<User> tmp = new ArrayList<>();
 			tmp.addAll(users.subList(i*subListSize, (i+1)*subListSize));
