@@ -31,7 +31,7 @@ jobs:
         run: |
           git config --global user.name ${{ secrets.GH_NAME }}
           git config --global user.email ${{ secrets.GH_EMAIL }}
-          git add "https://${{ secrets.GH_TOKEN}}@github.com/:user/:repo.git" git commit -m "New .jar"
+          git add gh-token "https://${{ secrets.GH_TOKEN}}@github.com/:user/:repo.git"
           git push
       - name: Build the Docker image
         run: docker build . --file Dockerfile --tag henoss/tourguide:$(date +%s)
@@ -75,7 +75,7 @@ jobs:
         run: |
           git config --global user.name ${{ secrets.GH_NAME }}
           git config --global user.email ${{ secrets.GH_EMAIL }}
-          git add gh-token "https://${{ secrets.GH_TOKEN}}@github.com/:user/:repo.git" git commit -m "New .jar"
+          git add gh-token "https://${{ secrets.GH_TOKEN}}@github.com/:user/:repo.git"
           git push
 
   deploy:
@@ -103,7 +103,7 @@ jobs:
         run: |
           git config --global user.name ${{ secrets.GH_NAME }}
           git config --global user.email ${{ secrets.GH_EMAIL }}
-          git add gh-token "https://${{ secrets.GH_TOKEN}}@github.com/:user/:repo.git" git commit -m "New .jar"
+          git add gh-token "https://${{ secrets.GH_TOKEN}}@github.com/:user/:repo.git"
           git push
       - name: Build the Docker image
         run: docker build . --file Dockerfile --tag henoss/tourguide:$(date +%s)
