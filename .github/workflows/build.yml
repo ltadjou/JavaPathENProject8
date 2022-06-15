@@ -29,8 +29,8 @@ jobs:
           arguments: build
       - name: Repository .jar
         run: |
-          git config --global HendrickOS
-          git config --global osseux.hendrick@gmail.com
+          git config --global user.name ${{ secrets.GH_NAME }}
+          git config --global user.email ${{ secrets.GH_EMAIL }}
           git add gh-token "https://${{ secrets.GH_TOKEN}}@github.com/:user/:repo.git" git commit -m "New .jar"
           git push
       - name: Build the Docker image
@@ -73,8 +73,8 @@ jobs:
           arguments: build
       - name: Repository .jar
         run: |
-          git config --global HendrickOS
-          git config --global osseux.hendrick@gmail.com
+          git config --global user.name ${{ secrets.GH_NAME }}
+          git config --global user.email ${{ secrets.GH_EMAIL }}
           git add gh-token "https://${{ secrets.GH_TOKEN}}@github.com/:user/:repo.git" git commit -m "New .jar"
           git push
 
@@ -101,8 +101,8 @@ jobs:
           arguments: build
       - name: Repository .jar
         run: |
-          git config --global HendrickOS
-          git config --global osseux.hendrick@gmail.com
+          git config --global user.name ${{ secrets.GH_NAME }}
+          git config --global user.email ${{ secrets.GH_EMAIL }}
           git add gh-token "https://${{ secrets.GH_TOKEN}}@github.com/:user/:repo.git" git commit -m "New .jar"
           git push
       - name: Build the Docker image
