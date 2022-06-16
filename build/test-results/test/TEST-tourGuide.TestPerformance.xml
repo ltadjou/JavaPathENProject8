@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="tourGuide.TestPerformance" tests="2" skipped="0" failures="0" errors="0" timestamp="2022-06-16T19:56:32" hostname="fv-az200-101" time="211.553">
+  <properties/>
+  <testcase name="highVolumeTrackLocation" classname="tourGuide.TestPerformance" time="100.78"/>
+  <testcase name="highVolumeGetRewards" classname="tourGuide.TestPerformance" time="110.773"/>
+  <system-out><![CDATA[Test test test
+19:56:32.523 [Test worker] INFO tourGuide.service.TourGuideService - TestMode enabled
+19:56:32.523 [Test worker] DEBUG tourGuide.service.TourGuideService - Initializing users
+19:56:33.858 [Test worker] DEBUG tourGuide.service.TourGuideService - Created 100000 internal test users.
+19:56:33.859 [Test worker] DEBUG tourGuide.service.TourGuideService - Finished initializing users
+19:56:33.889 [pool-6-thread-1] DEBUG tourGuide.tracker.Tracker - Begin Tracker. Tracking 100000 users.
+highVolumeTrackLocation: Time Elapsed: 99 seconds.
+Test test test
+19:58:13.290 [Test worker] INFO tourGuide.service.TourGuideService - TestMode enabled
+19:58:13.290 [Test worker] DEBUG tourGuide.service.TourGuideService - Initializing users
+19:58:13.747 [Test worker] DEBUG tourGuide.service.TourGuideService - Created 100000 internal test users.
+19:58:13.747 [Test worker] DEBUG tourGuide.service.TourGuideService - Finished initializing users
+Test test test
+19:58:13.760 [pool-7-thread-1] DEBUG tourGuide.tracker.Tracker - Begin Tracker. Tracking 100000 users.
+highVolumeGetRewards: Time Elapsed: 110 seconds.
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
