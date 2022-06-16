@@ -5,18 +5,16 @@
 
 package gpsUtil;
 
+import com.google.common.util.concurrent.RateLimiter;
+import gpsUtil.location.Attraction;
+import gpsUtil.location.Location;
+import gpsUtil.location.VisitedLocation;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
-
-import com.google.common.util.concurrent.RateLimiter;
-
-import gpsUtil.location.Attraction;
-import gpsUtil.location.Location;
-import gpsUtil.location.VisitedLocation;
 
 public class GpsUtil {
     private static final RateLimiter rateLimiter = RateLimiter.create(1000.0D);
@@ -36,7 +34,6 @@ public class GpsUtil {
     }
 
     public List<Attraction> getAttractions() {
-        System.out.println("Test test test");
         rateLimiter.acquire();
         this.sleepLighter();
         List<Attraction> attractions = new ArrayList();
